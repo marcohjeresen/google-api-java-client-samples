@@ -117,9 +117,9 @@ public class CalendarSample {
       Calendar calendar = addCalendar();
       updateCalendar(calendar);
       addEvent(calendar);
-      showEvents(calendar);
-      deleteCalendarsUsingBatch();
-      deleteCalendar(calendar);
+//      showEvents(calendar);
+//      deleteCalendarsUsingBatch();
+//      deleteCalendar(calendar);
 
     } catch (IOException e) {
       System.err.println(e.getMessage());
@@ -155,11 +155,11 @@ public class CalendarSample {
     };
 
     // Create 2 Calendar Entries to insert.
-    Calendar entry1 = new Calendar().setSummary("Calendar for Testing 1");
+    Calendar entry1 = new Calendar().setSummary("Calendar for Mad");
     client.calendars().insert(entry1).queue(batch, callback);
 
-    Calendar entry2 = new Calendar().setSummary("Calendar for Testing 2");
-    client.calendars().insert(entry2).queue(batch, callback);
+//    Calendar entry2 = new Calendar().setSummary("Calendar for Testing 2");
+//    client.calendars().insert(entry2).queue(batch, callback);
 
     batch.execute();
   }
@@ -192,7 +192,7 @@ public class CalendarSample {
 
   private static Event newEvent() {
     Event event = new Event();
-    event.setSummary("New Event");
+    event.setSummary("hjem");
     Date startDate = new Date();
     Date endDate = new Date(startDate.getTime() + 3600000);
     DateTime start = new DateTime(startDate, TimeZone.getTimeZone("UTC"));
@@ -208,26 +208,26 @@ public class CalendarSample {
     View.display(feed);
   }
 
-  private static void deleteCalendarsUsingBatch() throws IOException {
-    View.header("Delete Calendars Using Batch");
-    BatchRequest batch = client.batch();
-    for (Calendar calendar : addedCalendarsUsingBatch) {
-      client.calendars().delete(calendar.getId()).queue(batch, new JsonBatchCallback<Void>() {
-
-        @Override
-        public void onSuccess(Void content, HttpHeaders responseHeaders) {
-          System.out.println("Delete is successful!");
-        }
-
-        @Override
-        public void onFailure(GoogleJsonError e, HttpHeaders responseHeaders) {
-          System.out.println("Error Message: " + e.getMessage());
-        }
-      });
-    }
-
-    batch.execute();
-  }
+//  private static void deleteCalendarsUsingBatch() throws IOException {
+//    View.header("Delete Calendars Using Batch");
+//    BatchRequest batch = client.batch();
+//    for (Calendar calendar : addedCalendarsUsingBatch) {
+//      client.calendars().delete(calendar.getId()).queue(batch, new JsonBatchCallback<Void>() {
+//
+//        @Override
+//        public void onSuccess(Void content, HttpHeaders responseHeaders) {
+//          System.out.println("Delete is successful!");
+//        }
+//
+//        @Override
+//        public void onFailure(GoogleJsonError e, HttpHeaders responseHeaders) {
+//          System.out.println("Error Message: " + e.getMessage());
+//        }
+//      });
+//    }
+//
+//    batch.execute();
+//  }
 
   private static void deleteCalendar(Calendar calendar) throws IOException {
     View.header("Delete Calendar");
